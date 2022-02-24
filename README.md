@@ -10,6 +10,7 @@ This repo is an implementation of PyTorch version YOLOX, there is also a [MegEng
 <img src="assets/git_fig.png" width="1000" >
 
 ## Updates!!
+* 【2022/01/15】 Hyperparameter Optimization (HPO) Sweep added into main training run. HPO configs can be changed in base exp file.
 * 【2021/08/19】 We optimize the training process with **2x** faster training and **~1%** higher performance! See [notes](docs/updates_note.md) for more details.
 * 【2021/08/05】 We release [MegEngine version YOLOX](https://github.com/MegEngine/YOLOX).
 * 【2021/07/28】 We fix the fatal error of [memory leak](https://github.com/Megvii-BaseDetection/YOLOX/issues/103)
@@ -136,6 +137,11 @@ python tools/train.py -f exps/default/yolox_s.py -d 8 -b 64 --fp16 -o [--cache]
                          exps/default/yolox_m.py
                          exps/default/yolox_l.py
                          exps/default/yolox_x.py
+```
+Before running a sweep on initial trained model, check sweep_status.txt if its empty.
+```shell
+python tools/train.py -f exps/<exp_filename>.py -c /<path_to_YOLOx>/YOLOX/YOLOX_outputs/train1/best_ckpt.pth -d 1 -b 16 --fp16 --gpus 0 -expn <wandb_experiment_name>
+```
 ```
   
 **Multi Machine Training**
